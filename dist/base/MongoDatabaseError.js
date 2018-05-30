@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const common_1 = require("../common");
+class MongoDatabaseError extends common_1.BaseError {
+    constructor(message, details = {}) {
+        super(message || 'Unknown Mongo database error', details);
+    }
+}
+exports.default = MongoDatabaseError;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiTW9uZ29EYXRhYmFzZUVycm9yLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiLi4vLi4vbGliL2Jhc2UvTW9uZ29EYXRhYmFzZUVycm9yLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsc0NBQXNDO0FBRXRDLHdCQUF3QyxTQUFRLGtCQUFTO0lBQ3ZELFlBQVksT0FBZ0IsRUFBRSxVQUFlLEVBQUU7UUFDN0MsS0FBSyxDQUFDLE9BQU8sSUFBSSw4QkFBOEIsRUFBRSxPQUFPLENBQUMsQ0FBQztJQUM1RCxDQUFDO0NBQ0Y7QUFKRCxxQ0FJQyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IEJhc2VFcnJvciB9IGZyb20gJy4uL2NvbW1vbic7XG5cbmV4cG9ydCBkZWZhdWx0IGNsYXNzIE1vbmdvRGF0YWJhc2VFcnJvciBleHRlbmRzIEJhc2VFcnJvciB7XG4gIGNvbnN0cnVjdG9yKG1lc3NhZ2U/OiBzdHJpbmcsIGRldGFpbHM6IGFueSA9IHt9KSB7XG4gICAgc3VwZXIobWVzc2FnZSB8fCAnVW5rbm93biBNb25nbyBkYXRhYmFzZSBlcnJvcicsIGRldGFpbHMpO1xuICB9XG59Il19
