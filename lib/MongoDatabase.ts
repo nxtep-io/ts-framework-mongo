@@ -6,6 +6,7 @@ import BaseModel from './base/BaseModel';
 
 export interface MongoDatabaseOptions extends DatabaseOptions {
   url?: string;
+  logger?: Logger;
   mongoose?: Mongoose;
   mongooseOpts?: ConnectionOptions;
 }
@@ -23,8 +24,9 @@ export default class MongoDatabase implements Database {
    * @param options The database options
    */
   constructor(public options: MongoDatabaseOptions = {}) {
-    if (options.logger) {
-      this.logger = options.logger;
+    this.logger = this.options.logger;
+
+    if (this.logger) {
       this.logger.info(`Initializing mongodb database`, { url: maskAuthUrl(options.url) });
     }
     this.mongoose = options.mongoose || new Mongoose({

@@ -4,6 +4,7 @@ import { Database, Logger, DatabaseOptions } from './common';
 import BaseModel from './base/BaseModel';
 export interface MongoDatabaseOptions extends DatabaseOptions {
     url?: string;
+    logger?: Logger;
     mongoose?: Mongoose;
     mongooseOpts?: ConnectionOptions;
 }
