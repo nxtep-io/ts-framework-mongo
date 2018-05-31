@@ -6,7 +6,8 @@ export interface MongoDatabaseOptions extends DatabaseOptions {
     url?: string;
     logger?: Logger;
     mongoose?: Mongoose;
-    mongooseOpts?: ConnectionOptions;
+    mongooseOpts?: any;
+    connectionOpts?: ConnectionOptions;
 }
 export default class MongoDatabase implements Database {
     options: MongoDatabaseOptions;

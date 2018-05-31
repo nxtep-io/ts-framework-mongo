@@ -8,7 +8,8 @@ export interface MongoDatabaseOptions extends DatabaseOptions {
   url?: string;
   logger?: Logger;
   mongoose?: Mongoose;
-  mongooseOpts?: ConnectionOptions;
+  mongooseOpts?: any;
+  connectionOpts?: ConnectionOptions;
 }
 
 export default class MongoDatabase implements Database {
@@ -48,7 +49,10 @@ export default class MongoDatabase implements Database {
     }
 
     try {
-      await this.mongoose.connect(this.options.url, { promiseLibrary: global.Promise });
+      await this.mongoose.connect(this.options.url, { 
+        promiseLibrary: global.Promise,
+        ...this.options.connectionOpts,
+      });
     } catch (exception) {
       throw new MongoDatabaseError(exception.message, exception);
     }
