@@ -1,6 +1,7 @@
 /// <reference types="mongoose" />
 import { Mongoose, ConnectionOptions } from 'mongoose';
 import { Database, Logger, DatabaseOptions } from './common';
+import BaseModel from './base/BaseModel';
 export interface MongoDatabaseOptions extends DatabaseOptions {
     url?: string;
     mongoose?: Mongoose;
@@ -36,4 +37,12 @@ export default class MongoDatabase implements Database {
      * @returns {boolean}
      */
     isReady(): boolean;
+    /**
+     * Gets or registers a moongoose model instance by its name or definition.
+     *
+     * @param {string} name The model name
+     *
+     * @returns {any}
+     */
+    model<T extends BaseModel>(name: string | T | any): BaseModel;
 }

@@ -2,6 +2,7 @@ import { Mongoose, ConnectionOptions } from 'mongoose';
 import { Database, Logger, DatabaseOptions } from './common';
 import { maskAuthUrl } from './util';
 import MongoDatabaseError from './base/MongoDatabaseError';
+import BaseModel from './base/BaseModel';
 
 export interface MongoDatabaseOptions extends DatabaseOptions {
   url?: string;
@@ -76,5 +77,29 @@ export default class MongoDatabase implements Database {
    */
   public isReady(): boolean {
     return !!this.mongoose.connection.readyState;
+  }
+
+  /**
+   * Gets or registers a moongoose model instance by its name or definition.
+   *
+   * @param {string} name The model name
+   *
+   * @returns {any}
+   */
+  public model<T extends BaseModel>(name: string | T | any): BaseModel {
+    if (typeof name === 'string') {
+      return this.mongoose.model(name) as any;
+    } 
+    if (name.Schema) {
+      if (this.logger) {
+        this.logger.silly(`Registering model in database: ${name.modelName}`);
+      }
+      return this.mongoose.model(name.modelName, name.Schema) as any;
+    }
+
+    // Schema is not defined, there's nothing left to do
+    const n = name.modelName ? name.modelName : (name.name ? name.name : name);
+    throw new MongoDatabaseError(`Cannot register the model "${n}": Schema is not defined. ` +
+      `Make sure you have decorated the class with @Model(name, schema) or set the static Schema property.`);
   }
 }
